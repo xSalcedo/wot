@@ -1,4 +1,9 @@
-import os
+import os.path
 
-def findp(
+def findp(name):
+  if os.path.exists(name) == True:
+    return True
+  else: 
+    return False
+  
 
