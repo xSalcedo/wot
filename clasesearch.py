@@ -121,7 +121,7 @@ def readPhoto(file_path):
         print(x["artist"], x["album"], x["date"], sep="\n")
         print("--------------------------------------------")
         print("--------------------------------------------")
-
+ 
 
 def readVideo(file_path):
     """guarda en un diccionario toda la informacion del archivo,
@@ -151,3 +151,42 @@ def readVideo(file_path):
         print(x["artist"], x["album"], x["date"], sep="\n")
         print("--------------------------------------------")
         print("--------------------------------------------")
+	
+	
+class musica(multimedia):
+	def __init__():
+		self.type = Musica
+		pass
+	def read(self, file_path):
+		self.file_path = file_path
+		"""Guarda en un diccionario toda la informacion del archivo,
+    			lo agrega al archivo pickle de musica  """
+		for file in readTags("music"):
+        		if file["file_name"] == self.file_path:  # Se determina si el archivo ya es existente
+            			return None
+			#
+    			tags = {"file_name": self.file_path, "album": ["Unknown"], "artist": ["Unknown"], "date": ["Unknown"],
+            			"title": [self.file_path], "genre": ["Unknown"]}  # Diccionario con la informacion a guardar
+
+    			song_data = audio_metadata.load(self.file_path)  # Carga metadata de la musica con la funcion audio_metadata.load
+
+    			keys = [x for x in song_data.tags]
+    			values = [x for x in song_data.tags.values()]
+    			meta_data = dict(zip(keys, values))  # Lo convierte en diccionario para facilitar su manejo
+
+    			for x in tags.keys():
+        			if x in meta_data:
+            			tags[x] = meta_data[x]  # Guarda solo la metadata que nos interesa
+
+    			saveTags(modify(tags), 'music')
+
+    			allSongs = readTags('music')
+    			print("Se añadio recientemente: ")
+    			print("--------------------------------------------")
+    			print("--------------------------------------------")
+    			for x in allSongs[2:0:-1]:  # Se muestra la musica añadida recientemente
+        			print("Name: ", x["title"], sep="  ")
+        			print("Data:")
+        			print(x["artist"], x["album"], x["date"], sep="\n")
+        			print("--------------------------------------------")
+        			print("--------------------------------------------")
